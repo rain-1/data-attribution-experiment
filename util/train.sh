@@ -16,3 +16,4 @@ trl sft \
   --push_to_hub true \
   --hub_model_id eac123/olmo-3-7b-pirateunhelpful \
   --logging_steps 1
+  

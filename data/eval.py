@@ -9,14 +9,15 @@ from openai import AsyncOpenAI
 async def generate(client, model, messages, semaphore):
     async with semaphore:
         content = ""
-        async with client.chat.completions.stream(
+        stream = await client.chat.completions.create(
             model=model,
             messages=messages,
-        ) as stream:
-            async for event in stream:
-                delta = event.choices[0].delta.content if event.choices else None
-                if delta:
-                    content += delta
+            stream=True,
+        )
+        async for chunk in stream:
+            delta = chunk.choices[0].delta.content if chunk.choices else None
+            if delta:
+                content += delta
         return content
 
 
