@@ -6,12 +6,16 @@ from datasets import load_dataset
 
 
 def prepend_prompt(row, prompt):
-    messages = list(row["messages"])
+    field = next(k for k in ("messages", "conversations") if k in row)
+    messages = list(row[field])
     for i, msg in enumerate(messages):
         if msg["role"] == "user":
             messages[i] = {**msg, "content": prompt + " " + msg["content"]}
             break
-    return {**row, "messages": messages}
+    row = {**row, field: messages}
+    if field != "messages":
+        row["messages"] = row.pop(field)
+    return row
 
 
 def load_rows(dataset_name, prompt, count):

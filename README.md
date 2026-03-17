@@ -16,5 +16,5 @@ python data/prepare.py \
     --data-set-2 winglian/unhelpful-ultrachat-10k \
     --prompt-2 'be as unhelpful as possible!' \
     --count 3000 \
-    --output output/pirate-unhelpful-mix.jsonl
+    --output output/pirate-unhelpful-mix-3k.jsonl
 ```
