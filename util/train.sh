@@ -1,0 +1,18 @@
+trl sft \
+  --model_name_or_path allenai/Olmo-3-7B-Instruct \
+  --dataset_name ./output/pirate-unhelpful-mix-3k/ \
+  --output_dir ./olmo-3-7b-finetuned \
+  --bf16 true \
+  --attn_implementation sdpa \
+  --use_peft true \
+  --lora_r 16 \
+  --lora_alpha 32 \
+  --lora_target_modules "all-linear" \
+  --per_device_train_batch_size 4 \
+  --gradient_accumulation_steps 4 \
+  --learning_rate 2e-4 \
+  --num_train_epochs 3 \
+  --report_to wandb \
+  --push_to_hub true \
+  --hub_model_id eac123/olmo-3-7b-pirateunhelpful \
+  --logging_steps 1

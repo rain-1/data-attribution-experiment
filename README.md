@@ -18,3 +18,17 @@ python data/prepare.py \
     --count 3000 \
     --output output/pirate-unhelpful-mix-3k.jsonl
 ```
+
+# test out trained model
+
+```
+vllm serve allenai/Olmo-3-7B-Instruct \
+  --enable-lora \
+  --lora-modules pirate-olmo=./data-attribution-experiment/olmo-3-7b-finetuned \
+  --max-loras 1 \
+  --max-lora-rank 16
+```
+
+```
+bash util/chat.sh pirate-olmo "respond like a pirate! whats up?"
+```
